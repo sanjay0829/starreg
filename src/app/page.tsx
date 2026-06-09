@@ -336,9 +336,9 @@ export default function Home() {
                       <tr>
                         <td
                           colSpan={2}
-                          className="bg-orange-500 text-right hidden text-white text-sm"
+                          className="bg-orange-500 text-right  text-white text-sm"
                         >
-                          *Bank Convenience Fee will be extra
+                          *Amounts are inclusive of GST
                         </td>
                       </tr>
                     </tbody>
