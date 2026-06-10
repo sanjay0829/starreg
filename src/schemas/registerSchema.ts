@@ -11,9 +11,9 @@ export const RegisterSchema = z.object({
     .regex(/^[+0-9]{10,17}$/, "Phone number must be a valid  number"),
   city: z.string().min(1, "City Name is required"),
   state: z.string().min(1, "State Name is required"),
-  workshop: z.array(z.string()).optional(),
+  foundation_series: z.array(z.string()).optional(),
   core_series: z.array(z.string()).optional(),
   advance_series: z.array(z.string()).optional(),
-  master_class: z.array(z.string()).optional(),
+  masterclass_series: z.array(z.string()).optional(),
   total_amount: z.number(),
 });

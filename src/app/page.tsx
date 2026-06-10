@@ -44,7 +44,10 @@ export default function Home() {
       mobile: "",
       city: "",
       state: "",
-      workshop: [],
+      foundation_series: [],
+      core_series: [],
+      advance_series: [],
+      masterclass_series: [],
       total_amount: 0,
     },
   });
@@ -55,12 +58,12 @@ export default function Home() {
   const [masterAmount, setMasterAmount] = useState(0);
   const [allselected, setAllSelected] = useState(false);
 
-  const workshopSelected = form.watch("workshop");
+  const workshopSelected = form.watch("foundation_series");
 
   const coreSelected = form.watch("core_series");
 
   const advanceSelected = form.watch("advance_series");
-  const masterSelected = form.watch("master_class");
+  const masterSelected = form.watch("masterclass_series");
 
   useEffect(() => {
     const selectedWorkshops = workshops.filter((w) =>
@@ -131,7 +134,7 @@ export default function Home() {
     try {
       // 🔹 calculate total amount
       const selectedWorkshops = workshops.filter((w) =>
-        data.workshop?.includes(w.workshop_shortname),
+        data.foundation_series?.includes(w.workshop_shortname),
       );
 
       const totalAmount = selectedWorkshops.reduce(
@@ -258,7 +261,7 @@ export default function Home() {
 
               <div className="grid  grid-cols-1 gap-3">
                 <Controller
-                  name="workshop"
+                  name="foundation_series"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
@@ -479,7 +482,7 @@ export default function Home() {
 
               <div className="grid  grid-cols-1 gap-3">
                 <Controller
-                  name="master_class"
+                  name="masterclass_series"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
