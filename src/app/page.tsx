@@ -56,12 +56,19 @@ export default function Home() {
   const [coreAmount, setCoreAmount] = useState(0);
   const [advanceAmount, setAdvanceAmount] = useState(0);
   const [masterAmount, setMasterAmount] = useState(0);
-  const [allselected, setAllSelected] = useState(false);
+
+  const [dfoundationAmount, setDFoundationAmount] = useState(0);
+  const [dcoreAmount, setDCoreAmount] = useState(0);
+  const [dadvanceAmount, setDAdvanceAmount] = useState(0);
+  const [dmasterAmount, setDMasterAmount] = useState(0);
+
+  const [allFselected, setAllFSelected] = useState(false);
+  const [allCselected, setAllCSelected] = useState(false);
+  const [allAselected, setAllASelected] = useState(false);
+  const [allMselected, setAllMSelected] = useState(false);
 
   const workshopSelected = form.watch("foundation_series");
-
   const coreSelected = form.watch("core_series");
-
   const advanceSelected = form.watch("advance_series");
   const masterSelected = form.watch("masterclass_series");
 
@@ -70,16 +77,19 @@ export default function Home() {
       workshopSelected?.includes(w.workshop_shortname),
     );
 
-    if (selectedWorkshops.length == 5) {
-      setAllSelected(true);
-    } else {
-      setAllSelected(false);
-    }
-
     const amount = selectedWorkshops.reduce(
       (sum, item) => sum + item.workshop_amount,
       0,
     );
+
+    var dfamount = 0;
+    if (selectedWorkshops.length == workshops.length) {
+      setAllFSelected(true);
+      dfamount = amount - amount * 0.2;
+      setDFoundationAmount(dfamount);
+    } else {
+      setAllFSelected(false);
+    }
 
     const selectedCore = coreCourses.filter((w) =>
       coreSelected?.includes(w.workshop_shortname),
@@ -90,6 +100,15 @@ export default function Home() {
       0,
     );
 
+    var dcamount = 0;
+    if (selectedCore.length == coreCourses.length) {
+      setAllCSelected(true);
+      dcamount = camount - camount * 0.2;
+      setDCoreAmount(dcamount);
+    } else {
+      setAllCSelected(false);
+    }
+
     const selectedAdvance = advanceSeries.filter((w) =>
       advanceSelected?.includes(w.workshop_shortname),
     );
@@ -98,6 +117,15 @@ export default function Home() {
       (sum, item) => sum + item.workshop_amount,
       0,
     );
+
+    var daamount = 0;
+    if (selectedAdvance.length == advanceSeries.length) {
+      setAllASelected(true);
+      daamount = aamount - aamount * 0.2;
+      setDAdvanceAmount(daamount);
+    } else {
+      setAllASelected(false);
+    }
 
     const selectedMaster = masterClass.filter((w) =>
       masterSelected?.includes(w.workshop_shortname),
@@ -108,12 +136,26 @@ export default function Home() {
       0,
     );
 
+    var dmamount = 0;
+    if (selectedMaster.length == masterClass.length) {
+      setAllMSelected(true);
+      dmamount = mamount - mamount * 0.2;
+      setDMasterAmount(dmamount);
+    } else {
+      setAllMSelected(false);
+    }
+
     setFoundationAmount(amount);
     setCoreAmount(camount);
     setAdvanceAmount(aamount);
     setMasterAmount(mamount);
 
-    setTotalAmount(amount + camount + aamount + mamount);
+    setTotalAmount(
+      (selectedWorkshops.length == workshops.length ? dfamount : amount) +
+        (selectedCore.length == coreCourses.length ? dcamount : camount) +
+        (selectedAdvance.length == advanceSeries.length ? daamount : aamount) +
+        (selectedMaster.length == masterClass.length ? dmamount : mamount),
+    );
   }, [workshopSelected, coreSelected, advanceSelected, masterSelected]);
 
   // const getWorkshops = async () => {
@@ -573,26 +615,32 @@ export default function Home() {
                           </span>
                         </td>
                       </tr>
-                      {allselected && (
+                      {allFselected && (
                         <>
-                          <tr className="bg-gray-500 hidden text-white">
+                          <tr className="bg-gray-500  text-white">
                             <td className="px-2">Less 20% Discount :</td>
                             <td>
                               <span className="font-bold">
-                                {"INR"} {1179}
+                                {"INR"} {foundationAmount * 0.2}
                               </span>
                             </td>
                           </tr>
-                          <tr className="bg-amber-500 hidden text-white">
-                            <td className="px-2">Final Payable Amount :</td>
+                          <tr className="bg-amber-500  text-white">
+                            <td className="px-2">
+                              Final Foundation Series Amount :
+                            </td>
                             <td>
                               <span className="font-bold">
-                                {"INR"} {4716}
+                                {"INR"} {dfoundationAmount}
                               </span>
                             </td>
                           </tr>
                         </>
                       )}
+
+                      <tr>
+                        <td className="col-span-2 py-1 bg-white"></td>
+                      </tr>
 
                       <tr className="bg-gray-700 text-white border-t border-white">
                         <td className="px-2">
@@ -605,6 +653,31 @@ export default function Home() {
                             {"INR"} {coreAmount}
                           </span>
                         </td>
+                      </tr>
+
+                      {allCselected && (
+                        <>
+                          <tr className="bg-gray-500  text-white">
+                            <td className="px-2">Less 20% Discount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {coreAmount * 0.2}
+                              </span>
+                            </td>
+                          </tr>
+                          <tr className="bg-amber-500  text-white">
+                            <td className="px-2">Final Core Series Amount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {dcoreAmount}
+                              </span>
+                            </td>
+                          </tr>
+                        </>
+                      )}
+
+                      <tr>
+                        <td className="col-span-2 py-1 bg-white"></td>
                       </tr>
 
                       <tr className="bg-gray-700 text-white border-t border-white">
@@ -620,6 +693,33 @@ export default function Home() {
                         </td>
                       </tr>
 
+                      {allAselected && (
+                        <>
+                          <tr className="bg-gray-500  text-white">
+                            <td className="px-2">Less 20% Discount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {advanceAmount * 0.2}
+                              </span>
+                            </td>
+                          </tr>
+                          <tr className="bg-amber-500  text-white">
+                            <td className="px-2">
+                              Final Advance Series Amount :
+                            </td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {dadvanceAmount}
+                              </span>
+                            </td>
+                          </tr>
+                        </>
+                      )}
+
+                      <tr>
+                        <td className="col-span-2 py-1 bg-white"></td>
+                      </tr>
+
                       <tr className="bg-gray-700 text-white border-t border-white">
                         <td className="px-2">
                           Master Class Series Amount{" "}
@@ -631,6 +731,33 @@ export default function Home() {
                             {"INR"} {masterAmount}
                           </span>
                         </td>
+                      </tr>
+
+                      {allMselected && (
+                        <>
+                          <tr className="bg-gray-500  text-white">
+                            <td className="px-2">Less 20% Discount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {masterAmount * 0.2}
+                              </span>
+                            </td>
+                          </tr>
+                          <tr className="bg-amber-500  text-white">
+                            <td className="px-2">
+                              Final Master Class Series Amount :
+                            </td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {dmasterAmount}
+                              </span>
+                            </td>
+                          </tr>
+                        </>
+                      )}
+
+                      <tr>
+                        <td className="col-span-2 py-1 bg-white"></td>
                       </tr>
 
                       <tr className="bg-gray-900 text-white border-t border-white">

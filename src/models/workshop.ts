@@ -5,6 +5,7 @@ export interface Workshop extends Document {
   workshop_amount: number;
   workshop_date: string;
   workshop_shortname: string;
+  workshop_type: string;
   workshop_seat: number;
 }
 
@@ -20,7 +21,7 @@ const WorkshopSchema: Schema<Workshop> = new Schema(
       required: [true, "Workshop amount is required"],
     },
     workshop_date: { type: String, trim: true },
-
+    workshop_type: { type: String, trim: true },
     workshop_shortname: { type: String, trim: true, unique: true },
     workshop_seat: { type: Number, trim: true, default: 0 },
   },
