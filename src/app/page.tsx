@@ -36,29 +36,34 @@ export default function Home() {
       workshop_title:
         "The 300-day Ovarian Symphony - HPO Axis & Folliculogenesis",
       workshop_amount: 1179,
+      workshop_date: "15 July 2026",
     },
     {
       workshop_shortname: "CU02",
       workshop_title: "Follicular Phase Endocrinology",
       workshop_amount: 1179,
+      workshop_date: "22 July 2026",
     },
     {
       workshop_shortname: "CU03",
       workshop_title:
         "Ovulation- Physiology/ Precision Triggering/ Molecular Dynamics to Clinical Applications",
       workshop_amount: 1179,
+      workshop_date: "29 July 2026",
     },
     {
       workshop_shortname: "CU04",
       workshop_title:
         "Luteal Phase Endocrinology and Advances in Luteal Phase Support",
       workshop_amount: 1179,
+      workshop_date: "5 August 2026",
     },
     {
       workshop_shortname: "CU05",
       workshop_title:
         "Implantation – Genesis Dialogue – Decoding the Molecular Dialogue of Human Embryo Implantation",
       workshop_amount: 1179,
+      workshop_date: "12 August 2026",
     },
   ];
 
@@ -148,7 +153,7 @@ export default function Home() {
 
   return (
     <div className="w-full  min-h-screen flex items-center justify-center p-1">
-      <div className="max-w-5xl shadow-2xl my-2">
+      <div className="max-w-5xl w-full shadow-2xl my-2 border-white border-2 rounded-sm overflow-hidden">
         <Header />
 
         <div className="bg-white p-3">
@@ -247,26 +252,31 @@ export default function Home() {
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                       <FieldLabel className="text-xl font-bold">
-                        Courses
+                        Foundation Series
                       </FieldLabel>
                       <div className="w-full grid  grid-cols-1">
                         {workshops &&
                           workshops.map((item, index) => (
                             <div key={index}>
                               <div className="flex gap-4 items-center justify-between border p-1 m-1 bg-yellow-50">
-                                <div className="h-full min-h-[50px]  flex items-center">
+                                <div className="h-full min-h-[50px]  flex flex-col ">
                                   <Label
                                     htmlFor={item.workshop_shortname}
                                     className="text-[1rem] cursor-pointer"
                                   >
                                     {item.workshop_title}
                                   </Label>
+                                  <p className="font-bold">
+                                    (Date: {item.workshop_date}, Time: 8 PM Live
+                                    on Zoom)
+                                  </p>
                                 </div>
-                                <div className="flex p justify-center items-center ">
-                                  <span className="text-nowrap mr-2 text-lg font-bold">
+                                <div className="flex p gap-2 justify-center items-center ">
+                                  <p className="text-nowrap mr-2 text-lg font-bold">
                                     {"INR "}
-                                    {item.workshop_amount}{" "}
-                                  </span>
+                                    {item.workshop_amount} <br />
+                                    <span className="text-sm">(999 + GST)</span>
+                                  </p>
                                   <input
                                     type="checkbox"
                                     id={item.workshop_shortname}
@@ -294,13 +304,17 @@ export default function Home() {
                                         item.workshop_shortname,
                                       ) || false
                                     }
-                                    className="w-5 h-5 flex-shrink-0 cursor-pointer"
+                                    className="w-5 h-5 shrink-0 cursor-pointer"
                                   />
                                 </div>
                               </div>
                             </div>
                           ))}
                       </div>
+
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -315,7 +329,11 @@ export default function Home() {
                   <table className="w-full font-bold text-lg">
                     <tbody>
                       <tr className="bg-gray-700 text-white">
-                        <td className="px-2">Total Amount :</td>
+                        <td className="px-2">
+                          Total Amount{" "}
+                          <span>(1179 X {workshopSelected.length}) </span>{" "}
+                          :{" "}
+                        </td>
                         <td>
                           <span>
                             {"INR"} {totalAmount}
@@ -323,14 +341,24 @@ export default function Home() {
                         </td>
                       </tr>
                       {allselected && (
-                        <tr className="bg-amber-500 text-white">
-                          <td className="px-2">Discounted Amount :</td>
-                          <td>
-                            <span className="font-bold">
-                              {"INR"} {4715}
-                            </span>
-                          </td>
-                        </tr>
+                        <>
+                          <tr className="bg-gray-500 text-white">
+                            <td className="px-2">Less 20% Discount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {1179}
+                              </span>
+                            </td>
+                          </tr>
+                          <tr className="bg-amber-500 text-white">
+                            <td className="px-2">Final Payable Amount :</td>
+                            <td>
+                              <span className="font-bold">
+                                {"INR"} {4716}
+                              </span>
+                            </td>
+                          </tr>
+                        </>
                       )}
 
                       <tr>

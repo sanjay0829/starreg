@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import {
+  Nunito_Sans,
+  JetBrains_Mono,
+  Cormorant_Garamond,
+} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
@@ -7,6 +11,18 @@ const nunitosans = Nunito_Sans({
   variable: "--font-nunito-sans",
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"], // Include all weights
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetBrains_mono",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"], // Include all weights
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant_garamond",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // Include all weights
 });
 
 export const metadata: Metadata = {
@@ -20,12 +36,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunitosans.className}  antialiased`}>
+    <html
+      lang="en"
+      className={`${nunitosans.className} ${mono.variable} ${cormorant.variable}  antialiased`}
+    >
       <body
         style={{
           backgroundImage: 'url("/img/bg.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment: "fixed",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
         }}

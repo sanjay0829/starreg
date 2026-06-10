@@ -3,19 +3,31 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="grid grid-cols-4 w-full rounded-lg bg-amber-50/30 rounded-b-none border-2 border-b-0 border-pink-300  shadow-xl shadow-green-100 ">
+    <div
+      style={{
+        backgroundImage: 'url("/img/header_footer.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "top",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="flex  justify-center items-center  w-full rounded-lg bg-amber-50/30 rounded-b-none    "
+    >
       <div className="">
         <Image
           src={"/img/logo.png"}
           width={1000}
           height={1000}
-          className="w-full px-10 py-3"
+          className="  py-3 md:w-72 w-30"
           alt="header"
         />
       </div>
-      <div className="col-span-3 text-amber-400 flex w-full justify-center items-center flex-col">
-        <h2 className="font-bold text-5xl">Sunita Tandulwadkar</h2>
-        <h3 className="font-bold text-3xl">Academy of Reproduction</h3>
+      <div className="  text-amber-400 flex  justify-start items-start flex-col">
+        <h2 className="font-bold md:text-5xl text-lg font-display mt-1">
+          Sunita Tandulwadkar
+        </h2>
+        <h3 className="font-bold md:text-3xl text-[12px] font-mono uppercase">
+          Academy of Reproduction
+        </h3>
       </div>
     </div>
   );
