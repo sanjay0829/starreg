@@ -331,7 +331,6 @@ export default function Home() {
                                   <p className="text-nowrap mr-2 text-lg font-bold">
                                     {"INR "}
                                     {item.workshop_amount} <br />
-                                    <span className="text-sm">(999 + GST)</span>
                                   </p>
                                   <input
                                     type="checkbox"
@@ -376,7 +375,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="grid  grid-cols-1 gap-3">
+              <div className="hidden  grid-cols-1 gap-3">
                 <Controller
                   name="core_series"
                   control={form.control}
@@ -449,7 +448,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="grid  grid-cols-1 gap-3">
+              <div className="hidden  grid-cols-1 gap-3">
                 <Controller
                   name="advance_series"
                   control={form.control}
@@ -522,7 +521,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="grid  grid-cols-1 gap-3">
+              <div className="hidden  grid-cols-1 gap-3">
                 <Controller
                   name="masterclass_series"
                   control={form.control}
@@ -625,7 +624,7 @@ export default function Home() {
                               </span>
                             </td>
                           </tr>
-                          <tr className="bg-amber-500  text-white">
+                          <tr className="bg-amber-500 hi  text-white">
                             <td className="px-2">
                               Final Foundation Series Amount :
                             </td>
@@ -638,123 +637,14 @@ export default function Home() {
                         </>
                       )}
 
-                      <tr>
-                        <td className="col-span-2 py-1 bg-white"></td>
-                      </tr>
-
-                      <tr className="bg-gray-700 text-white border-t border-white">
-                        <td className="px-2">
-                          Core Series Amount{" "}
-                          <span>(1415 X {coreSelected?.length || 0}) </span>{" "}
-                          :{" "}
-                        </td>
+                      <tr className="bg-gray-500   text-white">
+                        <td className="px-2">Gst Amount 18% :</td>
                         <td>
-                          <span>
-                            {"INR"} {coreAmount}
+                          <span className="font-bold">
+                            {"INR"} {totalAmount * 0.18}
                           </span>
                         </td>
                       </tr>
-
-                      {allCselected && (
-                        <>
-                          <tr className="bg-gray-500  text-white">
-                            <td className="px-2">Less 20% Discount :</td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {coreAmount * 0.2}
-                              </span>
-                            </td>
-                          </tr>
-                          <tr className="bg-amber-500  text-white">
-                            <td className="px-2">Final Core Series Amount :</td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {dcoreAmount}
-                              </span>
-                            </td>
-                          </tr>
-                        </>
-                      )}
-
-                      <tr>
-                        <td className="col-span-2 py-1 bg-white"></td>
-                      </tr>
-
-                      <tr className="bg-gray-700 text-white border-t border-white">
-                        <td className="px-2">
-                          Advance Series Amount{" "}
-                          <span>(1651 X {advanceSelected?.length || 0}) </span>{" "}
-                          :{" "}
-                        </td>
-                        <td>
-                          <span>
-                            {"INR"} {advanceAmount}
-                          </span>
-                        </td>
-                      </tr>
-
-                      {allAselected && (
-                        <>
-                          <tr className="bg-gray-500  text-white">
-                            <td className="px-2">Less 20% Discount :</td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {advanceAmount * 0.2}
-                              </span>
-                            </td>
-                          </tr>
-                          <tr className="bg-amber-500  text-white">
-                            <td className="px-2">
-                              Final Advance Series Amount :
-                            </td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {dadvanceAmount}
-                              </span>
-                            </td>
-                          </tr>
-                        </>
-                      )}
-
-                      <tr>
-                        <td className="col-span-2 py-1 bg-white"></td>
-                      </tr>
-
-                      <tr className="bg-gray-700 text-white border-t border-white">
-                        <td className="px-2">
-                          Master Class Series Amount{" "}
-                          <span>(1769 X {masterSelected?.length || 0}) </span>{" "}
-                          :{" "}
-                        </td>
-                        <td>
-                          <span>
-                            {"INR"} {masterAmount}
-                          </span>
-                        </td>
-                      </tr>
-
-                      {allMselected && (
-                        <>
-                          <tr className="bg-gray-500  text-white">
-                            <td className="px-2">Less 20% Discount :</td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {masterAmount * 0.2}
-                              </span>
-                            </td>
-                          </tr>
-                          <tr className="bg-amber-500  text-white">
-                            <td className="px-2">
-                              Final Master Class Series Amount :
-                            </td>
-                            <td>
-                              <span className="font-bold">
-                                {"INR"} {dmasterAmount}
-                              </span>
-                            </td>
-                          </tr>
-                        </>
-                      )}
 
                       <tr>
                         <td className="col-span-2 py-1 bg-white"></td>
@@ -764,7 +654,8 @@ export default function Home() {
                         <td className="px-2 font-bold">Total Amount : </td>
                         <td>
                           <span>
-                            {"INR"} {totalAmount}
+                            {"INR"}{" "}
+                            {Math.round(totalAmount + totalAmount * 0.18)}
                           </span>
                         </td>
                       </tr>

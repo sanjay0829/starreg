@@ -3,34 +3,34 @@ export const workshops = [
     workshop_shortname: "CU01",
     workshop_title:
       "The 300-day Ovarian Symphony - HPO Axis & Folliculogenesis",
-    workshop_amount: 1179,
+    workshop_amount: 999,
     workshop_date: "15 July 2026",
   },
   {
     workshop_shortname: "CU02",
     workshop_title: "Follicular Phase Endocrinology",
-    workshop_amount: 1179,
+    workshop_amount: 999,
     workshop_date: "22 July 2026",
   },
   {
     workshop_shortname: "CU03",
     workshop_title:
       "Ovulation- Physiology/ Precision Triggering/ Molecular Dynamics to Clinical Applications",
-    workshop_amount: 1179,
+    workshop_amount: 999,
     workshop_date: "29 July 2026",
   },
   {
     workshop_shortname: "CU04",
     workshop_title:
       "Luteal Phase Endocrinology and Advances in Luteal Phase Support",
-    workshop_amount: 1179,
+    workshop_amount: 999,
     workshop_date: "5 August 2026",
   },
   {
     workshop_shortname: "CU05",
     workshop_title:
       "Implantation – Genesis Dialogue – Decoding the Molecular Dialogue of Human Embryo Implantation",
-    workshop_amount: 1179,
+    workshop_amount: 999,
     workshop_date: "12 August 2026",
   },
 ];
