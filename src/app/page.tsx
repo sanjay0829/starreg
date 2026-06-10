@@ -507,7 +507,7 @@ export default function Home() {
                                     {"INR "}
                                     {item.workshop_amount} <br />
                                     <span className="text-sm">
-                                      (1399 + GST)
+                                      (1499 + GST)
                                     </span>
                                   </p>
                                   <input
