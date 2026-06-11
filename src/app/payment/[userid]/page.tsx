@@ -78,7 +78,7 @@ const PaymentPage = () => {
       const amount = userData.total_amount;
 
       const res = await axios.post("/api/user/createRzpOrder", {
-        amount: (amount + Math.round(amount * 0.035)) * 100,
+        amount: amount * 100,
         currency: "INR",
         receipt_id: `${userData.reg_no}_star`,
         userId: userData._id,
