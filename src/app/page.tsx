@@ -24,12 +24,8 @@ import {
 } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {
-  advanceSeries,
-  coreCourses,
-  masterClass,
-  workshops,
-} from "@/helpers/workshops";
+import { advanceSeries, coreCourses, masterClass } from "@/helpers/workshops";
+import ProcessingOverlay from "@/components/processing";
 
 type FormData = z.infer<typeof RegisterSchema>;
 
@@ -51,6 +47,31 @@ export default function Home() {
       total_amount: 0,
     },
   });
+
+  const [workshops, setWorkshops] = useState<Workshop[] | undefined>([]);
+
+  const getWorkshops = async () => {
+    try {
+      const response = await axios.get<ApiResponse>("/api/admin/workshop");
+      console.log(response);
+
+      if (response.data.success) {
+        const filteredWorkshops = response.data.workshopList!.filter(
+          (workshop: any) => workshop.workshop_type === "Full_Day",
+        );
+
+        setWorkshops(response.data.workshopList);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast.error(axiosError.response?.data.message as string);
+    }
+  };
+
+  useEffect(() => {
+    getWorkshops();
+  }, []);
+
   const [totalAmount, setTotalAmount] = useState(0);
   const [foundationAmount, setFoundationAmount] = useState(0);
   const [coreAmount, setCoreAmount] = useState(0);
@@ -73,17 +94,22 @@ export default function Home() {
   const masterSelected = form.watch("masterclass_series");
 
   useEffect(() => {
-    const selectedWorkshops = workshops.filter((w) =>
-      workshopSelected?.includes(w.workshop_shortname),
-    );
+    const selectedWorkshops =
+      workshops?.filter((w) =>
+        workshopSelected?.includes(w.workshop_shortname),
+      ) || [];
 
-    const amount = selectedWorkshops.reduce(
-      (sum, item) => sum + item.workshop_amount,
+    const amount = selectedWorkshops?.reduce(
+      (sum, item) => sum + (Number(item.workshop_amount) || 0),
       0,
     );
 
     var dfamount = 0;
-    if (selectedWorkshops.length == workshops.length) {
+
+    if (
+      selectedWorkshops?.length > 0 &&
+      selectedWorkshops?.length == workshops?.length
+    ) {
       setAllFSelected(true);
       dfamount = amount - amount * 0.2;
       setDFoundationAmount(dfamount);
@@ -151,7 +177,7 @@ export default function Home() {
     setMasterAmount(mamount);
 
     setTotalAmount(
-      (selectedWorkshops.length == workshops.length ? dfamount : amount) +
+      (selectedWorkshops.length == workshops?.length ? dfamount : amount) +
         (selectedCore.length == coreCourses.length ? dcamount : camount) +
         (selectedAdvance.length == advanceSeries.length ? daamount : aamount) +
         (selectedMaster.length == masterClass.length ? dmamount : mamount),
@@ -175,18 +201,19 @@ export default function Home() {
   const onSubmit = async (data: FormData) => {
     try {
       // 🔹 calculate total amount
-      const selectedWorkshops = workshops.filter((w) =>
-        data.foundation_series?.includes(w.workshop_shortname),
-      );
+      const selectedWorkshops =
+        workshops?.filter((w) =>
+          data.foundation_series?.includes(w.workshop_shortname),
+        ) || [];
 
-      const totalAmount = selectedWorkshops.reduce(
+      const totalAmount = selectedWorkshops?.reduce(
         (sum, item) => sum + item.workshop_amount,
         0,
       );
 
       const payload = {
         ...data,
-        total_amount: totalAmount,
+        total_amount: totalAmount + totalAmount * 0.18,
       };
 
       console.log("Payload:", payload);
@@ -199,7 +226,7 @@ export default function Home() {
 
       if (response.data.success) {
         toast.success("Registration Successful");
-        router.push("/success"); // change route if needed
+        router.push("/payment/" + response.data.user?._id); // change route if needed
       }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -654,8 +681,7 @@ export default function Home() {
                         <td className="px-2 font-bold">Total Amount : </td>
                         <td>
                           <span>
-                            {"INR"}{" "}
-                            {Math.round(totalAmount + totalAmount * 0.18)}
+                            {"INR"} {totalAmount + totalAmount * 0.18}
                           </span>
                         </td>
                       </tr>
@@ -685,6 +711,7 @@ export default function Home() {
           </form>
         </div>
       </div>
+      {form.formState.isSubmitting && <ProcessingOverlay />}
     </div>
   );
 }

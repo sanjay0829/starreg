@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import {
   Nunito_Sans,
   JetBrains_Mono,
-  Cormorant_Garamond,
-} from "next/font/google";
+  Cormorant_Garamond, Geist } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const nunitosans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -38,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunitosans.className} ${mono.variable} ${cormorant.variable}  antialiased`}
+      className={cn("antialiased", nunitosans.className, mono.variable, cormorant.variable, "font-sans", geist.variable)}
     >
       <body
         style={{
