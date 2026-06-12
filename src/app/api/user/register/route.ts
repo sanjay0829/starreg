@@ -8,11 +8,21 @@ export async function POST(request: Request) {
   try {
     const userdata = (await request.json()) as User;
 
-    const userExist = await UserModel.findOne({ email: userdata.email });
-
     const regNo = await generateRegistrationNumber();
 
-    const newUser = await UserModel.create({ ...userdata, reg_no: regNo });
+    const newUser = await UserModel.findOneAndUpdate(
+      { email: userdata.email, payment_status: "Pending" }, // condition
+      {
+        $set: { ...userdata },
+        $setOnInsert: { reg_no: regNo },
+      },
+      {
+        new: true, // return updated/new document
+        upsert: true, // create if not exists
+      },
+    );
+
+    // const newUser = await UserModel.create({ ...userdata, reg_no: regNo });
 
     return Response.json(
       {
