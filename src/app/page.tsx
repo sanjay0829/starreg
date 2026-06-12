@@ -201,15 +201,6 @@ export default function Home() {
   const onSubmit = async (data: FormData) => {
     try {
       // 🔹 calculate total amount
-      const selectedWorkshops =
-        workshops?.filter((w) =>
-          data.foundation_series?.includes(w.workshop_shortname),
-        ) || [];
-
-      const totalAmount = selectedWorkshops?.reduce(
-        (sum, item) => sum + item.workshop_amount,
-        0,
-      );
 
       const payload = {
         ...data,
@@ -219,15 +210,15 @@ export default function Home() {
       console.log("Payload:", payload);
 
       // 🔹 API call
-      const response = await axios.post<ApiResponse>(
-        "/api/user/register",
-        payload,
-      );
+      // const response = await axios.post<ApiResponse>(
+      //   "/api/user/register",
+      //   payload,
+      // );
 
-      if (response.data.success) {
-        toast.success("Registration Successful");
-        router.push("/payment/" + response.data.user?._id); // change route if needed
-      }
+      // if (response.data.success) {
+      //   toast.success("Registration Successful");
+      //   router.push("/payment/" + response.data.user?._id); // change route if needed
+      // }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(axiosError.response?.data.message || "Something went wrong");
