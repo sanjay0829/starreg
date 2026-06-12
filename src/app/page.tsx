@@ -209,16 +209,16 @@ export default function Home() {
 
       console.log("Payload:", payload);
 
-      // 🔹 API call
-      // const response = await axios.post<ApiResponse>(
-      //   "/api/user/register",
-      //   payload,
-      // );
+      //🔹 API call
+      const response = await axios.post<ApiResponse>(
+        "/api/user/register",
+        payload,
+      );
 
-      // if (response.data.success) {
-      //   toast.success("Registration Successful");
-      //   router.push("/payment/" + response.data.user?._id); // change route if needed
-      // }
+      if (response.data.success) {
+        toast.success("Registration Successful");
+        router.push("/payment/" + response.data.user?._id); // change route if needed
+      }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast.error(axiosError.response?.data.message || "Something went wrong");
