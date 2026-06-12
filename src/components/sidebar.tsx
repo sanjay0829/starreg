@@ -137,7 +137,7 @@ const Sidebar = () => {
             </li>
             {usertype == "master" && (
               <>
-                <li className=" group relative items-center ">
+                <li className="hidden group relative items-center ">
                   <Link
                     href="/admin/workshop"
                     className={`flex items-center px-3 gap-4 hover:translate-x-2 transition-all duration-100 ${
@@ -162,7 +162,7 @@ const Sidebar = () => {
                     )}
                   </Link>
                 </li>
-                <li className="flex group relative items-center">
+                <li className="hidden group relative items-center">
                   <Link
                     href="/admin/category"
                     className={`flex items-center px-3 gap-4 hover:translate-x-2 transition-all duration-100 ${
@@ -187,7 +187,7 @@ const Sidebar = () => {
                     )}
                   </Link>
                 </li>
-                <li className=" group relative items-center ">
+                <li className=" hidden group relative items-center ">
                   <Link
                     href="/admin/adminusers"
                     className={`flex items-center px-3 gap-4 hover:translate-x-2 transition-all duration-100 ${

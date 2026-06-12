@@ -57,57 +57,16 @@ const Dashboard = () => {
         </h2>
       </div>
       <div className="w-full md:p-10 p-3 md:pt-2">
-        <div className="flex gap-4 justify-center flex-wrap ">
-          <div className="w-full max-w-72 text-xl rounded-lg overflow-hidden shadow-lg shadow-sky-500">
-            <div className="bg-neutral-600 font-semibold text-center py-1 text-white">
-              TOTAL REGISTRATION
-            </div>
-            <div className="bg-sky-900/40 p-2 ">
-              <h3 className="text-2xl text-center font-semibold">
-                {countData.TOTAL_REG}
-              </h3>
-            </div>
-          </div>
-          <div className="w-full max-w-72 text-xl rounded-lg overflow-hidden shadow-lg shadow-sky-500">
-            <div className="bg-neutral-600 font-semibold text-center py-1 text-white">
-              CONFERENCE REGISTRATION
-            </div>
-            <div className="bg-green-400/40 p-2 ">
-              <h3 className="text-2xl text-center font-semibold">
-                {countData.CONF}
-              </h3>
-            </div>
-          </div>
-          <div className="w-full max-w-72 text-xl rounded-lg overflow-hidden shadow-lg shadow-sky-500">
-            <div className="bg-neutral-600 font-semibold text-center py-1 text-white">
-              WORKSHOP REGISTRATION
-            </div>
-            <div className="bg-green-400/40 p-2 ">
-              <h3 className="text-2xl text-center font-semibold">
-                {countData.WORKSHOP}
-              </h3>
-            </div>
-          </div>
-          <div className="w-full max-w-72 text-xl rounded-lg overflow-hidden shadow-lg shadow-sky-500">
-            <div className="bg-neutral-600 font-semibold text-center py-1 text-white">
-              ACCOMMODATIONS
-            </div>
-            <div className="bg-red-400/40 p-2 ">
-              <h3 className="text-2xl text-center font-semibold">
-                {countData.ACCOMMODATION}
-              </h3>
-            </div>
-          </div>
-        </div>
+        <div className="flex gap-4 justify-center flex-wrap "></div>
         <div className="flex justify-center mt-10 flex-col items-center pt-3 border-t-2">
-          <h2 className="text-center text-2xl font-bold">
-            Workshop Wise Registrations
+          <h2 className="text-center text-2xl font-bold bg-white">
+            Series Course Wise Registrations
           </h2>
           <table className="w-full max-w-3xl">
             <thead>
               <tr className="p-2 bg-amber-300 font-extrabold text-lg">
-                <td className="p-1 border">Workshop Id</td>
-                <td className="p-1 border">Workshop Title</td>
+                <td className="p-1 border">Course Id</td>
+                <td className="p-1 border">Course Title</td>
                 <td className="p-1 border">Count</td>
               </tr>
             </thead>
