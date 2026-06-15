@@ -1,5 +1,6 @@
 "use client";
 import Header from "@/components/header";
+import ProcessingOverlay from "@/components/processing";
 import { Button } from "@/components/ui/button";
 import { updatePaymentDetails } from "@/helpers/updatePaymentDetails";
 import { User } from "@/models/user";
@@ -23,6 +24,7 @@ const PaymentPage = () => {
 
   const getUser = async () => {
     try {
+      setIsSaving(true);
       const response = await axios.get<ApiResponse>("/api/user", {
         params: { id: userId },
       });
@@ -30,6 +32,7 @@ const PaymentPage = () => {
       if (response.data.success) {
         setUserData(response.data.user);
         //console.log(response.data.user);
+        setIsSaving(false);
       }
     } catch (error) {
       console.log(error);
@@ -78,8 +81,8 @@ const PaymentPage = () => {
       const amount = userData.total_amount;
 
       const res = await axios.post("/api/user/createRzpOrder", {
-        amount: amount * 100,
-        //amount: 100,
+        //amount: amount * 100,
+        amount: 100,
         currency: "INR",
         receipt_id: `${userData.reg_no}_star`,
         userId: userData._id,
@@ -202,6 +205,7 @@ const PaymentPage = () => {
           </div>
         </div>
       </div>
+      {isSaving && <ProcessingOverlay LabelName="Processing..." />}
     </div>
   );
 };

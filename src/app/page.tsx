@@ -32,6 +32,8 @@ type FormData = z.infer<typeof RegisterSchema>;
 export default function Home() {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<FormData>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -52,15 +54,18 @@ export default function Home() {
 
   const getWorkshops = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get<ApiResponse>("/api/admin/workshop");
       console.log(response);
 
       if (response.data.success) {
-        const filteredWorkshops = response.data.workshopList!.filter(
-          (workshop: any) => workshop.workshop_type === "Full_Day",
-        );
+        // const filteredWorkshops = response.data.workshopList!.filter(
+        //   (workshop: any) => workshop.workshop_type === "Full_Day",
+        // );
 
         setWorkshops(response.data.workshopList);
+
+        setIsLoading(false);
       }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -703,6 +708,7 @@ export default function Home() {
         </div>
       </div>
       {form.formState.isSubmitting && <ProcessingOverlay />}
+      {isLoading && <ProcessingOverlay />}
     </div>
   );
 }
