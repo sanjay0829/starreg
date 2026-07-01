@@ -116,7 +116,7 @@ export default function Home() {
       selectedWorkshops?.length == workshops?.length
     ) {
       setAllFSelected(true);
-      dfamount = amount - amount * 0.2;
+      dfamount = amount - amount * 0.4;
       setDFoundationAmount(dfamount);
     } else {
       setAllFSelected(false);
@@ -134,7 +134,7 @@ export default function Home() {
     var dcamount = 0;
     if (selectedCore.length == coreCourses.length) {
       setAllCSelected(true);
-      dcamount = camount - camount * 0.2;
+      dcamount = camount - camount * 0.4;
       setDCoreAmount(dcamount);
     } else {
       setAllCSelected(false);
@@ -152,7 +152,7 @@ export default function Home() {
     var daamount = 0;
     if (selectedAdvance.length == advanceSeries.length) {
       setAllASelected(true);
-      daamount = aamount - aamount * 0.2;
+      daamount = aamount - aamount * 0.4;
       setDAdvanceAmount(daamount);
     } else {
       setAllASelected(false);
@@ -170,7 +170,7 @@ export default function Home() {
     var dmamount = 0;
     if (selectedMaster.length == masterClass.length) {
       setAllMSelected(true);
-      dmamount = mamount - mamount * 0.2;
+      dmamount = mamount - mamount * 0.4;
       setDMasterAmount(dmamount);
     } else {
       setAllMSelected(false);
@@ -640,10 +640,10 @@ export default function Home() {
                       {allFselected && (
                         <>
                           <tr className="bg-gray-500  text-white">
-                            <td className="px-2">Less 20% Discount :</td>
+                            <td className="px-2">Less 40% Discount :</td>
                             <td>
                               <span className="font-bold">
-                                {"INR"} {foundationAmount * 0.2}
+                                {"INR"} {foundationAmount * 0.4}
                               </span>
                             </td>
                           </tr>
