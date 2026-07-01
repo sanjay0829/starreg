@@ -398,7 +398,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="hidden  grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Controller
                   name="core_series"
                   control={form.control}
@@ -471,7 +471,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="hidden  grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Controller
                   name="advance_series"
                   control={form.control}
@@ -544,7 +544,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="hidden  grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <Controller
                   name="masterclass_series"
                   control={form.control}
